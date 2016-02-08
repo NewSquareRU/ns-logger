@@ -1,15 +1,14 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 module NSLogger
-       (NSLogStr(..), logNSDebug, logNSInfo, logNSSeverity, Severity(..))
+       (NSLogStr(..), logNS, Severity(..))
        where
 
 
-import Control.Monad.IO.Class (MonadIO, liftIO)
-import Data.Time (UTCTime, getCurrentTime)
+import Data.Time (UTCTime)
 import GHC.Generics (Generic)
 import Data.Aeson (ToJSON, encode)
-import System.Log.FastLogger (ToLogStr(..))
+import System.Log.FastLogger (ToLogStr(..), LogStr)
 
 
 data Severity
@@ -41,18 +40,5 @@ instance ToJSON a => ToLogStr (NSLogStr a) where
   toLogStr = toLogStr . encode
 
 
-logNS :: ToJSON a => UTCTime -> Severity -> a -> NSLogStr a
-logNS = NSLogStr
-
-
-logNSSeverity :: (ToJSON a, MonadIO m) => Severity -> a -> m (NSLogStr a)
-logNSSeverity severity msg = do
-   ut <- liftIO getCurrentTime
-   return (logNS ut severity msg)
-
-
-logNSDebug :: (ToJSON a, MonadIO m) => a -> m (NSLogStr a)
-logNSDebug = logNSSeverity DEBUG
-
-logNSInfo :: (ToJSON a, MonadIO m) => a -> m (NSLogStr a)
-logNSInfo = logNSSeverity INFO
+logNS :: ToJSON a => UTCTime -> Severity -> a -> LogStr
+logNS timestamp severity' msg = toLogStr (NSLogStr timestamp severity' msg)
