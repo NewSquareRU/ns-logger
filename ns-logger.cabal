@@ -1,9 +1,9 @@
 name:                ns-logger
-version:             0.1.0.0
-synopsis:            Simple project template from stack
+version:             0.1.0.1
+synopsis:            Use fast-logger for log in NS format
 description:         Please see README.md
 homepage:            http://github.com/dp-cylme/ns-logger#readme
-license:             BSD3
+license:             MIT
 license-file:        LICENSE
 author:              Danil Petrov
 maintainer:          dpetrov@cyl.me
