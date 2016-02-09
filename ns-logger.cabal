@@ -1,5 +1,5 @@
 name:                ns-logger
-version:             0.1.1.1
+version:             0.2.1.1
 synopsis:            Use fast-logger for log in NS format
 description:         Please see README.md
 homepage:            http://github.com/dp-cylme/ns-logger#readme
