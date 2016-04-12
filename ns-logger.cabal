@@ -1,5 +1,5 @@
 name:                ns-logger
-version:             0.2.1.1
+version:             0.3.0.0
 synopsis:            Use fast-logger for log in NS format
 description:         Please see README.md
 homepage:            http://github.com/dp-cylme/ns-logger#readme
@@ -7,7 +7,7 @@ license:             MIT
 license-file:        LICENSE
 author:              Danil Petrov
 maintainer:          dpetrov@cyl.me
-copyright:           2016 Author Here
+copyright:           2016 Danil Petrov
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
