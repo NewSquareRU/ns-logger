@@ -2,7 +2,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 module NSLogger
-       (logNS, Severity(..), logNSINFO, logNSDEBUG, logNSERROR)
+       (logNS, Severity(..), logNSINFO, logNSDEBUG, logNSERROR, renderNSLog)
        where
 
 
