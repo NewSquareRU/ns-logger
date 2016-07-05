@@ -2,7 +2,8 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 module NSLogger
-       (logNS, Severity(..), logNSINFO, logNSDEBUG, logNSERROR, renderNSLog)
+       (logNS, Severity(..), logNSINFO, logNSDEBUG, logNSERROR,
+        renderNSLog, NSMessage)
        where
 
 
@@ -17,9 +18,10 @@ import Control.Monad.Log
 
 import qualified Control.Monad.Log as Log
 
+type NSMessage a = WithTimestamp (WithSeverity a)
 
 logNS
-    :: (ToJSON a, MonadIO m, MonadLog (WithTimestamp (WithSeverity a)) m)
+    :: (ToJSON a, MonadIO m, MonadLog (NSMessage a) m)
     => UTCTime -> Severity -> a -> m ()
 logNS timestamp severity' msg =
     Log.logMessage
@@ -33,7 +35,7 @@ logNS timestamp severity' msg =
 
 
 logNSSeverity
-    :: (ToJSON a, MonadIO m, MonadLog (WithTimestamp (WithSeverity a)) m)
+    :: (ToJSON a, MonadIO m, MonadLog (NSMessage a) m)
     => Severity -> a -> m ()
 logNSSeverity severity' msg =
     Log.timestamp
@@ -45,19 +47,19 @@ logNSSeverity severity' msg =
 
 
 logNSINFO
-    :: (ToJSON a, MonadIO m, MonadLog (WithTimestamp (WithSeverity a)) m)
+    :: (ToJSON a, MonadIO m, MonadLog (NSMessage a) m)
     => a -> m ()
 logNSINFO = logNSSeverity Informational
 
 
 logNSDEBUG
-    :: (ToJSON a, MonadIO m, MonadLog (WithTimestamp (WithSeverity a)) m)
+    :: (ToJSON a, MonadIO m, MonadLog (NSMessage a) m)
     => a -> m ()
 logNSDEBUG = logNSSeverity Debug
 
 
 logNSERROR
-    :: (ToJSON a, MonadIO m, MonadLog (WithTimestamp (WithSeverity a)) m)
+    :: (ToJSON a, MonadIO m, MonadLog (NSMessage a) m)
     => a -> m ()
 logNSERROR = logNSSeverity Error
 
